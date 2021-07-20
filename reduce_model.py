@@ -16,10 +16,14 @@ def select_embeddings(model, old_vocab, new_vocab, model_name='new_model'):
         print('len(old_vocab) != len(model.old_embeddings)')
         return old_embeddings
     
-    new_num_tokens = len(new_vocab)
     if new_vocab is None:
         print('nothing to copy')
         return old_embeddings
+
+    new_num_tokens = 0
+    for token in old_vocab:
+        if token in new_vocab:
+            new_num_tokens += 1
     
     # Build new embeddings
     print('reducing model size ...')
